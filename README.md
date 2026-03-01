@@ -101,4 +101,3 @@ Given the class imbalance and safety-critical context, **Recall** for the hazard
 ## 📡 Data Source
 
 - **API:** [NASA NeoWs](https://api.nasa.gov/) — free key at api.nasa.gov
-- **Documentation:** [NeoWs Docs](https://api.nasa.gov/api.html#NeoWS)
