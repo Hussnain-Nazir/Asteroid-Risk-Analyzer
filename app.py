@@ -164,7 +164,7 @@ with st.sidebar:
         label_visibility="collapsed",
     )
     st.markdown("---")
-    st.markdown(f"<small style='color:{MUTED}'>Data: NASA NeoWs API<br>Model: Random Forest</small>", unsafe_allow_html=True)
+    st.markdown(f"<small style='color:{MUTED}'>Model: Random Forest</small>", unsafe_allow_html=True)
 
 # Load data
 try:
@@ -350,7 +350,7 @@ elif page == "📊 Data Analysis" and data_loaded:
 # ─────────────────────────────────────────────
 elif page == "🤖 Model Performance" and data_loaded:
     st.markdown("# 🤖 Model Performance")
-    st.markdown(f"<span style='color:{MUTED}'>Random Forest Classifier — Stratified 80/20 Split — class_weight='balanced'</span>", unsafe_allow_html=True)
+    st.markdown(f"<span style='color:{MUTED}'>Random Forest Classifier</span>", unsafe_allow_html=True)
     st.markdown("---")
 
     # Metrics row
