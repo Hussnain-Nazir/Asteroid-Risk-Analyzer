@@ -1,6 +1,6 @@
 # 🌍 Asteroid Risk Analyzer
 
-A machine learning portfolio project for classifying Near-Earth Objects (NEOs) as **Potentially Hazardous** or **Safe** using NASA data and a Random Forest Classifier.
+A machine learning project for classifying Near-Earth Objects (NEOs) as **Potentially Hazardous** or **Safe** using NASA data and a Random Forest Classifier.
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.32%2B-red)
