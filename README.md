@@ -1,4 +1,4 @@
-# 🌍 Asteroid Risk Analyzer
+# Asteroid Risk Analyzer
 
 A machine learning project for classifying Near-Earth Objects (NEOs) as **Potentially Hazardous** or **Safe** using NASA data and a Random Forest Classifier.
 
@@ -8,7 +8,7 @@ A machine learning project for classifying Near-Earth Objects (NEOs) as **Potent
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install dependencies
 ```bash
@@ -21,27 +21,27 @@ streamlit run app.py
 ```
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-asteroid_risk_analyzer/
+Asteroid-Risk-Analyzer/
 ├── app.py                     # Streamlit application
-├── requirements.txt
-├── README.md
+├── notebook/
+│   └── eda.ipynb              # Exploratory Data Analysis
 ├── data/
 │   └── neos.csv               # Fetched asteroid data
-├── notebooks/
-│   └── eda.ipynb              # Exploratory Data Analysis
-└── src/
-    ├── __init__.py
-    ├── data_loader.py         # NASA API fetcher + CSV loader
-    ├── preprocessing.py       # Cleaning, feature engineering
-    └── model.py               # Model training + evaluation
+├── src/
+│   ├── __init__.py
+│   ├── data_loader.py         # NASA API fetcher + CSV loader
+│   ├── preprocessing.py       # Cleaning, feature engineering
+│   └── model.py               # Model training + evaluation
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## 📊 Dataset Description
+## Dataset Description
 
 Data sourced from **NASA NeoWs (Near Earth Object Web Service)**:
 - Asteroid physical properties (size, magnitude)
@@ -64,7 +64,7 @@ Data sourced from **NASA NeoWs (Near Earth Object Web Service)**:
 
 ---
 
-## 🤖 Model Choice: Random Forest
+## odel Choice: Random Forest
 
 **Why Random Forest?**
 - Handles non-linear relationships between features
@@ -80,7 +80,7 @@ Data sourced from **NASA NeoWs (Near Earth Object Web Service)**:
 
 ---
 
-## 📈 Evaluation Metrics
+## Evaluation Metrics
 
 Given the class imbalance and safety-critical context, **Recall** for the hazardous class is prioritized:
 - **Recall** — catch as many real hazards as possible
@@ -89,7 +89,7 @@ Given the class imbalance and safety-critical context, **Recall** for the hazard
 
 ---
 
-## 💡 Key Insights
+## Key Insights
 
 1. **Miss distance** is the strongest single predictor of hazard classification
 2. **Absolute magnitude** and **diameter** are highly correlated
@@ -98,6 +98,6 @@ Given the class imbalance and safety-critical context, **Recall** for the hazard
 
 ---
 
-## 📡 Data Source
+## Data Source
 
 - **API:** [NASA NeoWs](https://api.nasa.gov/) — free key at api.nasa.gov

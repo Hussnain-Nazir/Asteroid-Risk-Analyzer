@@ -25,8 +25,7 @@ from src.model import train_model, predict_single
 # THEME CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="🌍 Asteroid Risk Analyzer",
-    page_icon="☄️",
+    page_title="Asteroid Risk Analyzer",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -138,14 +137,14 @@ plt.rcParams.update({
 # ─────────────────────────────────────────────
 # CACHED LOADERS
 # ─────────────────────────────────────────────
-@st.cache_data(show_spinner="🛸 Loading asteroid data...")
+@st.cache_data(show_spinner="Loading asteroid data...")
 def get_data():
     raw = load_data()
     clean = clean_and_prepare(raw)
     return raw, clean
 
 
-@st.cache_resource(show_spinner="🤖 Training model...")
+@st.cache_resource(show_spinner="Training model...")
 def get_model(df_hash: int):
     _, clean = get_data()
     return train_model(clean)
@@ -155,12 +154,12 @@ def get_model(df_hash: int):
 # SIDEBAR
 # ─────────────────────────────────────────────
 with st.sidebar:
-    st.markdown(f"## ☄️ Asteroid Risk Analyzer")
+    st.markdown(f"## Asteroid Risk Analyzer")
     st.markdown(f"<span style='color:{MUTED}'>Near-Earth Object Hazard Classification</span>", unsafe_allow_html=True)
     st.markdown("---")
     page = st.radio(
         "Navigation",
-        ["🏠 Home", "📊 Data Analysis", "🤖 Model Performance", "🔭 Risk Prediction"],
+        ["Home", "Data Analysis", "Model Performance", "Risk Prediction"],
         label_visibility="collapsed",
     )
     st.markdown("---")
@@ -172,7 +171,7 @@ try:
     data_loaded = True
 except Exception as e:
     data_loaded = False
-    st.error(f"❌ Could not load data: {e}\n\nCheck your NASA API key in `src/data_loader.py`.")
+    st.error(f"Could not load data: {e}\n\nCheck your NASA API key in `src/data_loader.py`.")
 
 if data_loaded:
     model, metrics = get_model(hash(str(clean_df.shape)))
@@ -182,14 +181,14 @@ if data_loaded:
 # ─────────────────────────────────────────────
 # PAGE: HOME
 # ─────────────────────────────────────────────
-if page == "🏠 Home":
-    st.markdown("# 🌍 Asteroid Risk Analyzer")
+if page == "Home":
+    st.markdown("# Asteroid Risk Analyzer")
     st.markdown(f"<p style='color:{MUTED}; font-size:1.1em'>Machine Learning Project | Binary Classification of Near-Earth Objects</p>", unsafe_allow_html=True)
     st.markdown("---")
 
     col1, col2 = st.columns([2, 1])
     with col1:
-        st.markdown("### 🎯 Project Overview")
+        st.markdown("### Project Overview")
         st.markdown("""
         This project uses **real NASA data** to classify asteroids as either:
         - 🔴 **Potentially Hazardous** — close approach within 0.05 AU & diameter > 140m
@@ -200,7 +199,7 @@ if page == "🏠 Home":
         an interactive risk prediction interface.
         """)
 
-        st.markdown("### 📡 Data Source")
+        st.markdown("### Data Source")
         st.markdown("""
         **NASA Near Earth Object Web Service (NeoWs)**
         - Real-time asteroid tracking data from NASA's Jet Propulsion Laboratory
@@ -210,7 +209,7 @@ if page == "🏠 Home":
         """)
 
     with col2:
-        st.markdown("### 📈 Dataset Stats")
+        st.markdown("### Dataset Stats")
         if data_loaded:
             total = len(clean_df)
             hazardous = clean_df["is_potentially_hazardous_asteroid"].sum()
@@ -220,7 +219,7 @@ if page == "🏠 Home":
             st.metric("🟢 Safe", f"{safe:,}", f"{safe/total:.1%}")
 
     st.markdown("---")
-    st.markdown("### 🧬 Feature Engineering")
+    st.markdown("### Feature Engineering")
     feature_descriptions = {
         "absolute_magnitude_h": "Intrinsic brightness — proxy for asteroid size",
         "diameter_min_km": "Estimated minimum diameter in kilometers",
@@ -240,11 +239,11 @@ if page == "🏠 Home":
 # ─────────────────────────────────────────────
 # PAGE: DATA ANALYSIS
 # ─────────────────────────────────────────────
-elif page == "📊 Data Analysis" and data_loaded:
-    st.markdown("# 📊 Data Analysis")
+elif page == "Data Analysis" and data_loaded:
+    st.markdown("# Data Analysis")
     st.markdown("---")
 
-    tab1, tab2, tab3 = st.tabs(["📋 Dataset Preview", "📈 Visualizations", "🔥 Correlations"])
+    tab1, tab2, tab3 = st.tabs(["Dataset Preview", "Visualizations", "Correlations"])
 
     with tab1:
         st.markdown("### Dataset Overview")
@@ -348,8 +347,8 @@ elif page == "📊 Data Analysis" and data_loaded:
 # ─────────────────────────────────────────────
 # PAGE: MODEL PERFORMANCE
 # ─────────────────────────────────────────────
-elif page == "🤖 Model Performance" and data_loaded:
-    st.markdown("# 🤖 Model Performance")
+elif page == "Model Performance" and data_loaded:
+    st.markdown("# Model Performance")
     st.markdown(f"<span style='color:{MUTED}'>Random Forest Classifier</span>", unsafe_allow_html=True)
     st.markdown("---")
 
@@ -432,15 +431,15 @@ elif page == "🤖 Model Performance" and data_loaded:
 # ─────────────────────────────────────────────
 # PAGE: RISK PREDICTION
 # ─────────────────────────────────────────────
-elif page == "🔭 Risk Prediction" and data_loaded:
-    st.markdown("# 🔭 Asteroid Risk Prediction")
+elif page == "Risk Prediction" and data_loaded:
+    st.markdown("# Asteroid Risk Prediction")
     st.markdown(f"<span style='color:{MUTED}'>Enter asteroid parameters to classify its hazard level</span>", unsafe_allow_html=True)
     st.markdown("---")
 
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown("### 🛸 Input Parameters")
+        st.markdown("### Input Parameters")
 
         abs_mag = st.slider(
             "Absolute Magnitude (H)", min_value=10.0, max_value=35.0, value=22.0, step=0.1,
@@ -463,10 +462,10 @@ elif page == "🔭 Risk Prediction" and data_loaded:
             help="Shape of orbit. 0 = circular, 1 = parabolic. Higher = more eccentric"
         )
 
-        predict_btn = st.button("🔭 Analyze Asteroid", use_container_width=True)
+        predict_btn = st.button("Analyze Asteroid", use_container_width=True)
 
     with col2:
-        st.markdown("### 📡 Analysis Result")
+        st.markdown("### Analysis Result")
 
         if predict_btn:
             input_data = {
@@ -487,7 +486,7 @@ elif page == "🔭 Risk Prediction" and data_loaded:
             if result["prediction"] == 1:
                 st.markdown(f"""
                 <div class="hazard-box">
-                    <h2 style="color:#ff4444; margin:0">⚠️ POTENTIALLY HAZARDOUS</h2>
+                    <h2 style="color:#ff4444; margin:0">🔴 POTENTIALLY HAZARDOUS</h2>
                     <h3 style="color:#ff6b6b; margin:8px 0">Probability: {prob_haz:.1%}</h3>
                     <p style="color:#ffaaaa; margin:0">This asteroid meets the criteria for potential Earth impact risk</p>
                 </div>
@@ -495,7 +494,7 @@ elif page == "🔭 Risk Prediction" and data_loaded:
             else:
                 st.markdown(f"""
                 <div class="safe-box">
-                    <h2 style="color:#00ff7f; margin:0">✅ SAFE</h2>
+                    <h2 style="color:#00ff7f; margin:0">🟢 SAFE</h2>
                     <h3 style="color:#00cc66; margin:8px 0">Confidence: {prob_safe:.1%}</h3>
                     <p style="color:#aaffcc; margin:0">This asteroid does not pose a significant hazard to Earth</p>
                 </div>
@@ -516,10 +515,10 @@ elif page == "🔭 Risk Prediction" and data_loaded:
             plt.close()
 
         else:
-            st.info("👈 Adjust the parameters and click **Analyze Asteroid** to get a classification.")
+            st.info("Adjust the parameters and click **Analyze Asteroid** to get a classification.")
             st.markdown(f"""
             <div style='background:{CARD_BG}; border:1px solid #30363d; border-radius:10px; padding:16px; color:{MUTED}'>
-            <h4 style='color:{ACCENT}'>📖 How to Use</h4>
+            <h4 style='color:{ACCENT}'>How to Use</h4>
             <ul>
                 <li>Set the asteroid's <b>absolute magnitude</b> — lower means bigger</li>
                 <li>Estimate its <b>diameter</b> and <b>velocity</b></li>
@@ -534,4 +533,4 @@ elif page == "🔭 Risk Prediction" and data_loaded:
             """, unsafe_allow_html=True)
 
 elif not data_loaded:
-    st.warning("⚠️ Could not load data. Check your NASA API key in `src/data_loader.py`.")
+    st.warning("Could not load data. Check your NASA API key in `src/data_loader.py`.")
